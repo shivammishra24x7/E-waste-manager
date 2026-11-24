@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Waste Manager</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        body {
+            background-color: #f4f6f8;
+            color: #333;
+            scroll-behavior: smooth;
+        }
+        /* Header */
+        header {
+            background-color: #ffffff;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 50px;
+        }
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #2e7d32;
+        }
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 25px;
+        }
+        nav ul li a {
+            text-decoration: none;
+            color: #333;
+            font-weight: 600;
+            font-size: 1rem;
+            transition: color 0.3s;
+        }
+        nav ul li a:hover {
+            color: #2e7d32;
+        }
+
+        /* Hero Section (Welcome) */
+        .hero {
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('https://images.unsplash.com/photo-1532996122724-e3c3fa4a0d55?auto=format&fit=crop&w=1350&q=80') no-repeat center center/cover;
+            color: white;
+            padding: 0 20px;
+        }
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 15px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+        }
+        .hero p {
+            font-size: 1.2rem;
+            max-width: 600px;
+            margin-bottom: 25px;
+        }
+        .btn {
+            background-color: #2e7d32;
+            color: white;
+            padding: 12px 30px;
+            border: none;
+            border-radius: 5px;
+            font-size: 1rem;
+            font-weight: bold;
+            cursor: pointer;
+            text-decoration: none;
+            transition: background 0.3s;
+        }
+        .btn:hover {
+            background-color: #1b5e20;
+        }
+
+        /* About Us Section */
+        .about-section {
+            padding: 100px 50px;
+            background-color: #ffffff;
+            text-align: center;
+            min-height: 80vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+        .about-section h2 {
+            font-size: 2.5rem;
+            color: #2e7d32;
+            margin-bottom: 20px;
+        }
+        .about-section p {
+            max-width: 800px;
+            font-size: 1.1rem;
+            line-height: 1.6;
+            color: #555;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header -->
+    <header>
+        <div class="logo">♻ Waste Manager</div>
+        <nav>
+            <ul>
+                <li><a href="#home">Home</a></li>
+                <li><a href="price.html">Price</a></li>
+                <li><a href="loginpage.html" >Login</a></li>
+                <li><a href="#about">About Us</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Hero / Home Section -->
+    <section id="home" class="hero">
+        <h1>Welcome to Waste Manager</h1>
+        <p>Aapke kachre aur e-waste ko sahi tareeqe se prabandhit karne aur behtar daam paane ka aasaan madhyam.</p>
+        <a href="#about" class="btn">Aur Jaanein</a>
+    </section>
+
+    <!-- About Us Section (Scroll target) -->
+    <section id="about" class="about-section">
+        <h2>About Us</h2>
+        <p>
+            Waste Manager ek aisi platform hai jo informal scrap collectors aur authorized recycling units ke beech ek digital pul (bridge) ka kaam karti hai. Humara uddeshya kachre ko surakshit aur transparent tarike se sahi jagah pahunchana hai taaki paryavaran (environment) ko bachaya ja sake aur collectors ko unki mehnat ka sahi aur uchit daam mil sake.
+        </p>
+    </section>
+
+</body>
+</html>
