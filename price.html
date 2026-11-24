@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="hi" data-theme="dark">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+    <title>Kabadiwala Connect | कबाड़ीवाला कनेक्ट - E-Waste & Scrap Rates</title>
+    <!-- Linked External CSS -->
+    <link rel="stylesheet" href="price.css">
+    <!-- FontAwesome for Icons -->
+   
+</head>
+<body>
+<div class="w">
+    <!-- Top Navigation -->
+    <nav>
+        <div class="logo">
+            <i>♻</i>
+            <div>
+                <span>Kabadiwala Connect</span>
+                <small style="display:block; font-size:0.75rem; color:var(--muted); font-weight:normal;">कबाड़ीवाला कनेक्ट (E-Waste Portal)</small>
+            </div>
+        </div>
+        <div class="nr">
+            <button class="pill" onclick="document.getElementById('top').scrollIntoView()">रेट लिस्ट</button>
+            <button class="pill w2" onclick="document.getElementById('sell').scrollIntoView()">पिकअप बुक करें</button>
+            <button class="tg" id="tg" aria-label="Toggle theme">☀</button>
+        </div>
+    </nav>
+
+    <h1 id="top">अधिकृत कबाड़ और ई-वेस्ट भाव (Scrap Rates)</h1>
+    
+    <!-- City & Search Bar -->
+    <div class="bar">
+        <select id="city" aria-label="City"></select>
+        <input id="q" type="search" placeholder="सामान खोजें जैसे: तांबा, PCB, बैटरी, AC..." aria-label="Search materials">
+    </div>
+
+    <!-- Category Tabs -->
+    <div class="tabs" id="tabs"></div>
+
+    <!-- Rate Cards Grid -->
+    <div class="grid" id="grid"></div>
+
+    <p class="note">नोट: थोक (Bulk) ई-वेस्ट और कमर्शियल भाव अलग हो सकते हैं। <a href="#sell">अधिक जानकारी के लिए संपर्क करें</a></p>
+    
+    <hr>
+
+    <!-- Localities Chips -->
+    <h2 id="lh"></h2>
+    <div class="chips" id="chips"></div>
+
+    <!-- Sell / Pickup Booking Section -->
+    <div class="sell" id="sell">
+        <h2>ई-वेस्ट या कबाड़ सीधे अधिकृत रीसायकलर को बेचें</h2>
+        <form id="f">
+            <input required placeholder="आपका नाम (Your Name)" aria-label="Name">
+            <input required inputmode="tel" pattern="[0-9]{10}" placeholder="10 अंकों का फोन नंबर" aria-label="Phone">
+            <input required id="loc" placeholder="क्षेत्र / लोकेलिटी (Locality)" aria-label="Locality">
+            <select id="cat2" aria-label="Type"></select>
+            <button class="go" type="submit">पिकअप बुक करें (Book Pickup)</button>
+        </form>
+        <div id="ok" role="status">✅ अनुरोध प्राप्त हुआ! अधिकृत कबाड़ीवाला / रीसायकलर जल्द आपसे संपर्क करेगा।</div>
+    </div>
+
+    <footer>Kabadiwala Connect • Informal Collector & EPR Bridge Platform. Sample rates for demonstration.</footer>
+</div>
+
+<!-- Linked External JavaScript -->
+<script src="price.js"></script>
+</body>
+</html>

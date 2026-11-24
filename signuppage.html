@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Login & Sign Up</title>
+  <style>
+    * { box-sizing: border-box; font-family: Arial, sans-serif; }
+    body {
+      margin: 0;
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: #f3f4f6;
+      padding: 16px;
+    }
+    .card {
+      background: #fff;
+      width: 100%;
+      max-width: 380px;
+      padding: 28px;
+      border-radius: 12px;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+    }
+    h2 { margin: 0 0 8px; font-size: 24px; color: #111827; }
+    p.sub { margin: 0 0 20px; font-size: 14px; color: #6b7280; }
+    .field { margin-bottom: 14px; }
+    label { display: block; font-size: 13px; margin-bottom: 6px; color: #374151; }
+    input {
+      width: 100%;
+      padding: 10px 12px;
+      border: 1px solid #d1d5db;
+      border-radius: 8px;
+      font-size: 14px;
+    }
+    input:focus { outline: none; border-color: #2563eb; }
+    button.primary {
+      width: 100%;
+      padding: 11px;
+      border: none;
+      border-radius: 8px;
+      background: #2563eb;
+      color: #fff;
+      font-size: 15px;
+      font-weight: bold;
+      cursor: pointer;
+      margin-top: 6px;
+    }
+    button.primary:hover { background: #1d4ed8; }
+    .switch {
+      margin-top: 16px;
+      text-align: center;
+      font-size: 14px;
+      color: #4b5563;
+    }
+    .switch button {
+      background: none;
+      border: none;
+      color: #2563eb;
+      font-weight: bold;
+      cursor: pointer;
+      padding: 0;
+      font-size: 14px;
+    }
+    .msg {
+      margin-top: 12px;
+      font-size: 13px;
+      text-align: center;
+      min-height: 18px;
+      color: #059669;
+    }
+    .msg.err { color: #dc2626; }
+    .hidden { display: none; }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <h2 id="formTitle">Login</h2>
+    <p class="sub" id="formSub">Email ya mobile number se login karein</p>
+
+    <form id="authForm">
+      <div class="field hidden" id="nameField">
+        <label for="name">Poora Naam</label>
+        <input type="text" id="name" placeholder="Apna naam likhein" />
+      </div>
+
+      <div class="field">
+        <label for="identifier">Email ya Mobile Number</label>
+        <input
+          type="text"
+          id="identifier"
+          placeholder="naam@example.com ya 9876543210"
+          required
+        />
+      </div>
+
+      <div class="field">
+        <label for="password">Password</label>
+        <input
+          type="password"
+          id="password"
+          placeholder="Password daalein"
+          required
+        />
+      </div>
+
+      <button type="submit" class="primary" id="submitBtn">Login</button>
+      <div class="msg" id="msg"></div>
+    </form>
+
+    <div class="switch">
+      <span id="switchText">Naya account chahiye?</span>
+      <button type="button" id="toggleBtn">Sign Up</button>
+    </div>
+  </div>
+
+  <script>
+    let isSignup = false;
+
+    const formTitle = document.getElementById("formTitle");
+    const formSub = document.getElementById("formSub");
+    const nameField = document.getElementById("nameField");
+    const nameInput = document.getElementById("name");
+    const identifierInput = document.getElementById("identifier");
+    const passwordInput = document.getElementById("password");
+    const submitBtn = document.getElementById("submitBtn");
+    const switchText = document.getElementById("switchText");
+    const toggleBtn = document.getElementById("toggleBtn");
+    const authForm = document.getElementById("authForm");
+    const msg = document.getElementById("msg");
+
+    function isValidEmailOrPhone(val) {
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      const phoneRegex = /^[6-9]\d{9}$/;
+      return emailRegex.test(val) || phoneRegex.test(val);
+    }
+
+    toggleBtn.addEventListener("click", () => {
+      isSignup = !isSignup;
+      msg.textContent = "";
+      msg.classList.remove("err");
+
+      if (isSignup) {
+        formTitle.textContent = "Sign Up";
+        formSub.textContent = "Email ya mobile number se naya account banayein";
+        nameField.classList.remove("hidden");
+        nameInput.required = true;
+        submitBtn.textContent = "Create Account";
+        switchText.textContent = "Pehle se account hai?";
+        toggleBtn.textContent = "Login";
+      } else {
+        formTitle.textContent = "Login";
+        formSub.textContent = "Email ya mobile number se login karein";
+        nameField.classList.add("hidden");
+        nameInput.required = false;
+        submitBtn.textContent = "Login";
+        switchText.textContent = "Naya account chahiye?";
+        toggleBtn.textContent = "Sign Up";
+      }
+    });
+
+    authForm.addEventListener("submit", (e) => {
+      e.preventDefault();
+      const idVal = identifierInput.value.trim();
+      const passVal = passwordInput.value;
+      const nameVal = nameInput.value.trim();
+
+      if (!isValidEmailOrPhone(idVal)) {
+        msg.textContent = "Sahi email ya 10-digit mobile number daalein.";
+        msg.classList.add("err");
+        return;
+      }
+
+      if (passVal.length < 6) {
+        msg.textContent = "Password kam se kam 6 characters ka hona chahiye.";
+        msg.classList.add("err");
+        return;
+      }
+
+      const users = JSON.parse(localStorage.getItem("demo_users") || "[]");
+      msg.classList.remove("err");
+
+      if (isSignup) {
+        if (!nameVal) {
+          msg.textContent = "Kripya apna naam likhein.";
+          msg.classList.add("err");
+          return;
+        }
+        const exists = users.some((u) => u.id === idVal);
+        if (exists) {
+          msg.textContent = "Yeh email ya number pehle se registered hai.";
+          msg.classList.add("err");
+          return;
+        }
+        users.push({ name: nameVal, id: idVal, password: passVal });
+        localStorage.setItem("demo_users", JSON.stringify(users));
+        msg.textContent = "Account ban gaya! Ab aap login kar sakte hain.";
+        authForm.reset();
+      } else {
+        const user = users.find((u) => u.id === idVal && u.password === passVal);
+        if (!user) {
+          msg.textContent = "Galat email/number ya password.";
+          msg.classList.add("err");
+          return;
+        }
+        msg.textContent = `Swagat hai, ${user.name}! Login safal raha.`;
+      }
+    });
+  </script>
+</body>
+</html>
